@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./aideck/backend
+    container_name: aideck-backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./aideck/backend:/app
+
+  db:
+    image: postgres:15
+    container_name: aideck-db
+    restart: always
+    environment:
+      POSTGRES_USER: aideck
+      POSTGRES_PASSWORD: aideckpass
+      POSTGRES_DB: aideck_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

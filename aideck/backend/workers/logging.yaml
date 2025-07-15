@@ -1,0 +1,12 @@
+# JSON logging config for AIDECK workers
+version: 1
+formatters:
+  json:
+    format: '{"time": "%(asctime)s", "level": "%(levelname)s", "message": %(message)s}'
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: json
+root:
+  level: INFO
+  handlers: [console]
