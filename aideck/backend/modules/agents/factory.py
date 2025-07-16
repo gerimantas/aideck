@@ -9,16 +9,20 @@ from .github_manager import GitHubManagerAgent
 
 class AgentFactory:
     @staticmethod
-    def create_agent(agent_type: str):
+    def create_agent(config_or_type):
+        if isinstance(config_or_type, dict):
+            agent_type = config_or_type.get("type", "planner").lower()
+        else:
+            agent_type = str(config_or_type).lower()
         if agent_type == "planner":
             return PlannerAgent()
-        elif agent_type == "bug_hunter":
+        elif agent_type == "bughunter" or agent_type == "bug_hunter":
             return BugHunterAgent()
-        elif agent_type == "progress_tracker":
+        elif agent_type == "progresstracker" or agent_type == "progress_tracker":
             return ProgressTrackerAgent()
-        elif agent_type == "doc_generator":
+        elif agent_type == "docgenerator" or agent_type == "doc_generator":
             return DocGeneratorAgent()
-        elif agent_type == "github_manager":
+        elif agent_type == "githubmanager" or agent_type == "github_manager":
             return GitHubManagerAgent()
         else:
             raise ValueError(f"Unknown agent type: {agent_type}")
