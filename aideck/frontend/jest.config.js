@@ -5,5 +5,9 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  testMatch: ['**/tests/**/*.test.(ts|tsx)'],
+  testMatch: [
+    '../../tests/frontend/**/*.test.(ts|tsx)',
+    '**/src/**/*.test.(ts|tsx)'
+  ],
+  setupFiles: ['<rootDir>/jest.setup.js'],
 };
