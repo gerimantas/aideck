@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'aideck-backend'
+    static_configs:
+      - targets: ['aideck-backend:8000']

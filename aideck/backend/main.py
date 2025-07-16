@@ -2,6 +2,8 @@
 AIDECK FastAPI entrypoint
 Main application setup with routers and middleware
 """
+import sentry_sdk
+sentry_sdk.init(dsn="<YOUR_SENTRY_DSN>")
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer

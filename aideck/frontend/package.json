@@ -9,6 +9,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@sentry/react": "^9.39.0",
+    "@sentry/tracing": "^7.120.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@vitejs/plugin-react": "^4.6.0",

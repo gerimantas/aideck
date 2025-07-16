@@ -12,10 +12,24 @@ class EmbeddingTools:
     def embed_project(self, project_id: str, text: str, embedding_fn):
         embedding = embedding_fn(text)
         metadata = {"project_id": project_id}
-        self.vector_store.add_vector(embedding, metadata=metadata)
+        ids = [project_id + "_" + str(hash(text))]
+        self.vector_store.add_vector(embedding, metadata=metadata, ids=ids)
         return embedding
 
     def query_project_vectors(self, project_id: str, query_embedding, top_k=5):
         results = self.vector_store.query(query_embedding, top_k=top_k)
-        # Filter by project_id
-        return [r for r in results if r.get("metadata", {}).get("project_id") == project_id]
+        # ChromaDB returns a dict with 'ids', 'embeddings', 'metadatas', etc.
+        if isinstance(results, list):
+            filtered = []
+            for item in results:
+                if isinstance(item, dict):
+                    meta = item.get('metadata') or item.get('metadatas') or {}
+                    if meta.get("project_id") == project_id:
+                        filtered.append(meta)
+            return filtered
+        elif isinstance(results, dict):
+            metadatas = results.get('metadatas', [])
+            ids = results.get('ids', [])
+            filtered = [m for m, i in zip(metadatas, ids) if isinstance(m, dict) and m.get("project_id") == project_id]
+            return filtered
+        return []
