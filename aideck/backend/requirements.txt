@@ -1,4 +1,4 @@
-psycopg2-binary
+
 fastapi
 uvicorn[standard]
 sqlalchemy[asyncio]
@@ -16,3 +16,4 @@ fastapi-limiter
 pydantic-settings
 asyncpg
 python-multipart
+authlib

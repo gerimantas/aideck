@@ -13,7 +13,11 @@ def setup_rate_limiter(app):
 
 # Async rate limiter initialization for FastAPI startup event
 async def init_rate_limiter():
-    redis = await aioredis.from_url("redis://localhost:6379", encoding="utf8", decode_responses=True)
+    import os
+    redis_host = os.environ.get("REDIS_HOST", "redis")
+    redis_port = os.environ.get("REDIS_PORT", "6379")
+    redis_url = f"redis://{redis_host}:{redis_port}"
+    redis = await aioredis.from_url(redis_url, encoding="utf8", decode_responses=True)
     await FastAPILimiter.init(redis)
 
 # Example usage in FastAPI:

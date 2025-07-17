@@ -12,7 +12,6 @@ services:
     depends_on:
       - db
       - redis
-      - celery
     volumes:
       - ./aideck/backend:/app
 
@@ -41,16 +40,20 @@ services:
     ports:
       - "6379:6379"
 
+
   celery:
     build: ./aideck/backend
     container_name: aideck-celery
     command: celery -A workers.tasks_worker worker --loglevel=info
     env_file:
       - .env
+    environment:
+      - PYTHONPATH=/app
     depends_on:
       - redis
       - db
-
+    volumes:
+      - ./aideck/backend:/app
   prometheus:
     image: prom/prometheus:latest
     container_name: aideck-prometheus
@@ -58,7 +61,6 @@ services:
       - "9090:9090"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-    volumes:
       - ./frontend:/app
 
   grafana:

@@ -2,6 +2,7 @@
 AIDECK FastAPI entrypoint
 Main application setup with routers and middleware
 """
+print("[AIDECK] main.py started!")
 ## Sentry error tracking laikinai išjungtas
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -89,5 +90,5 @@ if __name__ == "__main__":
         "main:app",
         host="0.0.0.0",
         port=8000,
-        reload=True if settings.ENVIRONMENT == "development" else False
+        reload=True if settings.ENV == "development" else False
     )
