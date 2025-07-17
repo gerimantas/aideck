@@ -2,8 +2,7 @@
 AIDECK FastAPI entrypoint
 Main application setup with routers and middleware
 """
-import sentry_sdk
-sentry_sdk.init(dsn="<YOUR_SENTRY_DSN>")
+## Sentry error tracking laikinai išjungtas
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer
@@ -13,7 +12,7 @@ from config import settings
 from database import database, engine
 from models import metadata
 from routers import auth_router, projects_router, tasks_router, agents_router, github_router
-from modules.security.security_middleware import SecurityMiddleware
+from modules.security.security_middleware import setup_rate_limiter, init_rate_limiter
 
 # Create FastAPI app
 app = FastAPI(
@@ -36,14 +35,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Custom security middleware
-app.add_middleware(SecurityMiddleware)
 
-# Database setup
+
+
+# Database and rate limiter setup
 @app.on_event("startup")
 async def startup():
-    """Initialize database connection"""
+    """Initialize database connection and rate limiter"""
     await database.connect()
+    # Rate limiter async init
+    await init_rate_limiter()
     # Create tables (async)
     async with engine.begin() as conn:
         await conn.run_sync(metadata.create_all)
@@ -60,6 +61,15 @@ app.include_router(tasks_router.router, prefix="/api/tasks", tags=["tasks"])
 app.include_router(agents_router.router, prefix="/api/agents", tags=["agents"])
 app.include_router(github_router.router, prefix="/api/github", tags=["github"])
 
+
+# Viešas konfigūracijos endpointas frontend'ui
+@app.get("/api/config")
+async def get_config():
+    return {
+        "version": app.version,
+        "environment": settings.ENV,
+        "cors_origins": settings.CORS_ORIGINS
+    }
 @app.get("/")
 async def root():
     """Health check endpoint"""

@@ -1,8 +1,9 @@
+
 version: '3.9'
 
 services:
   backend:
-    build: ./aideck/backend
+    build: ./backend
     container_name: aideck-backend
     env_file:
       - .env
@@ -10,8 +11,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
+      - celery
     volumes:
-      - ./aideck/backend:/app
+      - ./backend:/app
 
   db:
     image: postgres:15
@@ -19,12 +22,28 @@ services:
     restart: always
     environment:
       POSTGRES_USER: aideck
-      POSTGRES_PASSWORD: aideckpass
-      POSTGRES_DB: aideck_db
+      POSTGRES_PASSWORD: aideck
+      POSTGRES_DB: aideck
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: aideck-redis
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: ./backend
+    container_name: aideck-celery
+    command: celery -A workers.tasks_worker worker --loglevel=info
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - db
 
   prometheus:
     image: prom/prometheus:latest
@@ -33,6 +52,14 @@ services:
       - "9090:9090"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  frontend:
+    build: ./frontend
+    container_name: aideck-frontend
+    ports:
+      - "3001:4173"
+    volumes:
+      - ./frontend:/app
 
   grafana:
     image: grafana/grafana:latest
