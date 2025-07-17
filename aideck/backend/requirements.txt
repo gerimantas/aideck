@@ -17,3 +17,4 @@ pydantic-settings
 asyncpg
 python-multipart
 authlib
+chromadb
