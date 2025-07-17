@@ -1,46 +1,46 @@
-Prioritizuotas Veiksmų Planas
-🔥 Fase 1: Kritinių Problemų Sprendimas (1-2 savaitės)
-1.1 Konfigūracijos Konsolidacija
-<input disabled="" type="checkbox"> Suvienijt docker-compose failų konfigūraciją
-<input disabled="" type="checkbox"> Standartizuoti .env failų valdymą
-<input disabled="" type="checkbox"> Sukurti centralizuotą config valdymą
-1.2 Bazinės Infrastruktūros Stabilizavimas
-<input disabled="" type="checkbox"> Išspręsti PostgreSQL connection issues
-<input disabled="" type="checkbox"> Sukonfigūruoti Redis Celery integraciją
-<input disabled="" type="checkbox"> Pataisyti CORS ir middleware setup
+Prioritized Action Plan
+🔥 Phase 1: Resolve Critical Issues (1-2 weeks)
+1.1 Configuration Consolidation
+<input disabled="" type="checkbox"> Unify docker-compose file configuration
+<input disabled="" type="checkbox"> Standardize .env file management
+<input disabled="" type="checkbox"> Create centralized config management
+1.2 Stabilize the Base Infrastructure
+<input disabled="" type="checkbox"> Resolve PostgreSQL connection issues
+<input disabled="" type="checkbox"> Configure Redis Celery integration
+<input disabled="" type="checkbox"> Fix CORS and middleware setup
 1.3 Dependencies Update
-<input disabled="" type="checkbox"> Atnaujinti React Query į v5
-<input disabled="" type="checkbox"> Pridėti trūkstamas AI dependencies
+<input disabled="" type="checkbox"> Update React Query to v5
+<input disabled="" type="checkbox"> Add missing AI dependencies
 <input disabled="" type="checkbox"> Resolve compatibility issues
-⚡ Fase 2: Pagrindinės Funkcionalumo Implementacija (2-3 savaitės)
-2.1 Agentų Sistema
-<input disabled="" type="checkbox"> Implementuoti tikrą AI funkcionalumą BaseAgent'e
-<input disabled="" type="checkbox"> Sukurti veikiančią Orchestrator logika
-<input disabled="" type="checkbox"> Integruoti OpenAI API calls
+⚡ Phase 2: Implement Core Functionality (2-3 weeks)
+2.1 Agents System
+<input disabled="" type="checkbox" checked> Implement real AI functionality in BaseAgent
+<input disabled="" type="checkbox" checked> Create working Orchestrator logic
+<input disabled="" type="checkbox" checked> Integrate OpenAI API calls
 2.2 Vector Store Implementation
-<input disabled="" type="checkbox"> Užbaigti ChromaDB integracija
-<input disabled="" type="checkbox"> Implementuoti embeddings generavimą
-<input disabled="" type="checkbox"> Sukurti RAG functionality
+<input disabled="" type="checkbox"> Complete ChromaDB integration
+<input disabled="" type="checkbox"> Implement embeddings generation
+<input disabled="" type="checkbox"> Create RAG functionality
 2.3 Frontend Integration
-<input disabled="" type="checkbox"> Sukurti tikrus API endpoints
-<input disabled="" type="checkbox"> Implementuoti agent results display
-<input disabled="" type="checkbox"> Integruoti real-time updates
-🛠️ Fase 3: Saugumas ir Monitoringas (1-2 savaitės)
+<input disabled="" type="checkbox"> Create real API endpoints
+<input disabled="" type="checkbox"> Implement agent results display
+<input disabled="" type="checkbox"> Integrate real-time updates
+🛠️ Phase 3: Security and Monitoring (1-2 weeks)
 3.1 Security Hardening
-<input disabled="" type="checkbox"> Implementuoti tikrą OAuth2 flow
-<input disabled="" type="checkbox"> Sukonfigūruoti rate limiting
+<input disabled="" type="checkbox"> Implement real OAuth2 flow
+<input disabled="" type="checkbox"> Configure rate limiting
 <input disabled="" type="checkbox"> Secure secrets management
 3.2 Monitoring Setup
-<input disabled="" type="checkbox"> Sukonfigūruoti Prometheus metrics
-<input disabled="" type="checkbox"> Sukurti Grafana dashboards
-<input disabled="" type="checkbox"> Implementuoti structured logging
+<input disabled="" type="checkbox"> Configure Prometheus metrics
+<input disabled="" type="checkbox"> Create Grafana dashboards
+<input disabled="" type="checkbox"> Implement structured logging
 3.3 Testing Framework
-<input disabled="" type="checkbox"> Parašyti unit tests
-<input disabled="" type="checkbox"> Sukurti integration tests
+<input disabled="" type="checkbox"> Write unit tests
+<input disabled="" type="checkbox"> Create integration tests
 <input disabled="" type="checkbox"> Setup load testing
-🚀 Fase 4: Production Readiness (1 savaitė)
+🚀 Phase 4: Production Readiness (1 week)
 4.1 CI/CD Pipeline
-<input disabled="" type="checkbox"> Sukurti GitHub Actions workflow
+<input disabled="" type="checkbox"> Create GitHub Actions workflow
 <input disabled="" type="checkbox"> Automated testing pipeline
 <input disabled="" type="checkbox"> Deployment automation
 4.2 Documentation
