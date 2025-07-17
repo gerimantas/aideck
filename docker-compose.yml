@@ -3,7 +3,7 @@ version: '3.9'
 
 services:
   backend:
-    build: ./backend
+    build: ./aideck/backend
     container_name: aideck-backend
     env_file:
       - .env
@@ -14,7 +14,13 @@ services:
       - redis
       - celery
     volumes:
-      - ./backend:/app
+      - ./aideck/backend:/app
+
+  frontend:
+    build: ./aideck/frontend
+    container_name: aideck-frontend
+    ports:
+      - "3000:3000"
 
   db:
     image: postgres:15
@@ -36,7 +42,7 @@ services:
       - "6379:6379"
 
   celery:
-    build: ./backend
+    build: ./aideck/backend
     container_name: aideck-celery
     command: celery -A workers.tasks_worker worker --loglevel=info
     env_file:
@@ -52,12 +58,6 @@ services:
       - "9090:9090"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-
-  frontend:
-    build: ./frontend
-    container_name: aideck-frontend
-    ports:
-      - "3001:4173"
     volumes:
       - ./frontend:/app
 
