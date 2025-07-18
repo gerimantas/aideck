@@ -2,7 +2,7 @@
 Test Orchestrator chained workflow with error handling
 """
 import pytest
-from aideck.backend.modules.agents.orchestrator import Orchestrator
+from modules.agents.orchestrator import Orchestrator
 
 @pytest.mark.asyncio
 async def test_orchestrator_chained_workflow():

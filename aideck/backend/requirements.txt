@@ -1,3 +1,5 @@
+# Prometheus metrics
+prometheus-fastapi-instrumentator
 
 fastapi
 uvicorn[standard]

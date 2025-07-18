@@ -13,7 +13,9 @@ services:
       - db
       - redis
     volumes:
-      - ./aideck/backend:/app
+      - ./aideck:/app/aideck
+    environment:
+      - PYTHONPATH=/app
 
   frontend:
     build: ./aideck/frontend
@@ -53,7 +55,7 @@ services:
       - redis
       - db
     volumes:
-      - ./aideck/backend:/app
+      - ./aideck:/app/aideck
   prometheus:
     image: prom/prometheus:latest
     container_name: aideck-prometheus
@@ -67,7 +69,7 @@ services:
     image: grafana/grafana:latest
     container_name: aideck-grafana
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:

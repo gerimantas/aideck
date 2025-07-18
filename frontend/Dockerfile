@@ -1,7 +1,10 @@
 # Minimal Dockerfile for React frontend
-FROM node:20-alpine
+FROM node:20
 WORKDIR /app
-COPY . /app
-RUN npm install --legacy-peer-deps && npm install -g vite && npm run build
+COPY package.json ./
+RUN yarn install --frozen-lockfile
+COPY . .
+RUN yarn build
+RUN yarn global add serve
 EXPOSE 3000
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
+CMD ["serve", "-s", "dist", "-l", "3000"]

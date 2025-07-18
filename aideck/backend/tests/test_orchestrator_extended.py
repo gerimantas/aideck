@@ -2,7 +2,7 @@
 Test Orchestrator with multiple agents and background task triggering
 """
 import pytest
-from aideck.backend.modules.agents.orchestrator import Orchestrator
+from modules.agents.orchestrator import Orchestrator
 
 @pytest.mark.asyncio
 async def test_orchestrator_multi_agent():
@@ -23,7 +23,7 @@ async def test_orchestrator_background_task(monkeypatch):
     def fake_delay(task_name, payload):
         called["task_name"] = task_name
         called["payload"] = payload
-    monkeypatch.setattr("aideck.backend.workers.tasks_worker.run_agent_task.delay", fake_delay)
+    monkeypatch.setattr("workers.tasks_worker.run_agent_task.delay", fake_delay)
     orchestrator.trigger_background_task("test_task", {"foo": "bar"})
     assert called["task_name"] == "test_task"
     assert called["payload"] == {"foo": "bar"}

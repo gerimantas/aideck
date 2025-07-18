@@ -2,7 +2,7 @@
 Embedding tools for AIDECK (ChromaDB, Pinecone abstraction)
 """
 from chromadb import Client as ChromaClient
-from aideck.backend.modules.utils.vector_store import VectorStore
+from modules.utils.vector_store import VectorStore
 
 class EmbeddingTools:
     def __init__(self, backend: str = "chromadb", config: dict = None):

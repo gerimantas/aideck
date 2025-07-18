@@ -2,8 +2,8 @@
 Test Orchestrator with PlannerAgent using real AI functionality
 """
 import pytest
-from aideck.backend.modules.agents.orchestrator import Orchestrator
-from aideck.backend.modules.agents.planner import PlannerAgent
+from modules.agents.orchestrator import Orchestrator
+from modules.agents.planner import PlannerAgent
 
 @pytest.mark.asyncio
 async def test_orchestrator_with_planner():

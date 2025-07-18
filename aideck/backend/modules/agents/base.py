@@ -2,7 +2,7 @@
 BaseAgent class with standardized I/O and OpenAI integration for AIDECK agents
 """
 from pydantic import BaseModel
-from aideck.backend.config import settings
+from config import settings
 import httpx
 
 class AgentInput(BaseModel):

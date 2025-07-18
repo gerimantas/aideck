@@ -3,7 +3,7 @@ Orchestrator coordinates agent collaboration for AIDECK
 """
 from .base import BaseAgent
 from .factory import AgentFactory
-from aideck.backend.modules.utils.agent_logs import log_agent_action
+from modules.utils.agent_logs import log_agent_action
 from typing import Any
 import inspect
 
@@ -65,6 +65,6 @@ class Orchestrator:
 
     def trigger_background_task(self, task_name, payload):
         # This will enqueue a Celery task
-        from aideck.backend.workers.tasks_worker import run_agent_task
+        from workers.tasks_worker import run_agent_task
         run_agent_task.delay(task_name, payload)
         log_agent_action("Orchestrator", f"Triggered background task: {task_name}")

@@ -10,9 +10,13 @@ class Settings(BaseSettings):
     """Application settings
     Naudojamos .env reikšmės iš šakninio katalogo
     """
+
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
     
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://aideck:aideck@db:5432/aideck"  # Docker Compose: host 'db'
+    DATABASE_URL: str = "postgresql+asyncpg://aideck:aideck@localhost:5432/aideck"  # Localhost for local run
 
     # Security
     SECRET_KEY: str = "your-secret-key-here"
@@ -20,7 +24,20 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     # CORS
-    CORS_ORIGINS: List[str] = ["http://localhost:3000"]
+    CORS_ORIGINS: str = ""
+
+    @property
+    def cors_origins(self) -> list[str]:
+        import json
+        raw = self.CORS_ORIGINS or os.getenv("CORS_ORIGINS", "")
+        # Palaiko JSON sąrašą arba CSV
+        try:
+            origins = json.loads(raw)
+            if isinstance(origins, list):
+                return [o.strip() for o in origins if isinstance(o, str) and o.strip()]
+        except Exception:
+            pass
+        return [origin.strip() for origin in raw.split(",") if origin.strip()]
 
     # Environment
     ENV: str = "development"
