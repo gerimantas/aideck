@@ -33,3 +33,9 @@ class EmbeddingTools:
             filtered = [m for m, i in zip(metadatas, ids) if isinstance(m, dict) and m.get("project_id") == project_id]
             return filtered
         return []
+
+    def rag_retrieve(self, project_id: str, query_text: str, embedding_fn, top_k=5):
+        query_embedding = embedding_fn(query_text)
+        results = self.query_project_vectors(project_id, query_embedding, top_k=top_k)
+        # Return top_k metadatas and optionally embeddings
+        return results

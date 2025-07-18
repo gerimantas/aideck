@@ -4,7 +4,7 @@ Async SQLAlchemy database setup for AIDECK
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
 from databases import Database
-from config import settings
+from aideck.backend.config import settings
 
 DATABASE_URL = settings.DATABASE_URL
 

@@ -5,8 +5,8 @@ Authentication router for AIDECK (JWT/OAuth2)
 
 from fastapi import APIRouter, HTTPException, status, Depends, Request
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-from modules.security.auth import authenticate_user
-from modules.security.jwt_handler import create_jwt_token, verify_jwt_token
+from aideck.backend.modules.security.auth import authenticate_user
+from aideck.backend.modules.security.jwt_handler import create_jwt_token, verify_jwt_token
 from fastapi_limiter.depends import RateLimiter
 from authlib.integrations.starlette_client import OAuth
 

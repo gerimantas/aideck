@@ -3,7 +3,7 @@ ORM models for AIDECK backend, including RBAC roles
 """
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from database import Base
+from aideck.backend.database import Base
 import datetime
 
 class User(Base):

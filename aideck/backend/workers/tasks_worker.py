@@ -3,10 +3,10 @@ Celery worker for background tasks in AIDECK
 """
 
 from celery import Celery
-from modules.agents.factory import AgentFactory
-from modules.agents.base import BaseAgent
-from modules.utils.agent_logs import log_agent_action
-from config import settings
+from aideck.backend.modules.agents.factory import AgentFactory
+from aideck.backend.modules.agents.base import BaseAgent
+from aideck.backend.modules.utils.agent_logs import log_agent_action
+from aideck.backend.config import settings
 
 celery_app = Celery(
     'aideck_tasks',

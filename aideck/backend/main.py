@@ -9,11 +9,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer
 import uvicorn
 
-from config import settings
-from database import database, engine
-from models import metadata
-from routers import auth_router, projects_router, tasks_router, agents_router, github_router
-from modules.security.security_middleware import setup_rate_limiter, init_rate_limiter
+from aideck.backend.config import settings
+from aideck.backend.database import database, engine
+from aideck.backend.models import metadata
+from aideck.backend.routers import auth_router, projects_router, tasks_router, agents_router, github_router
+from aideck.backend.modules.security.security_middleware import setup_rate_limiter, init_rate_limiter
 
 # Create FastAPI app
 app = FastAPI(

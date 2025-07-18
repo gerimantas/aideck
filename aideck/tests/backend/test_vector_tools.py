@@ -4,7 +4,7 @@ import pytest
 from aideck.backend.modules.utils.vector_tools import EmbeddingTools
 
 def dummy_embedding_fn(text):
-    return [float(ord(c)) for c in text]
+    return [0.0] * 1536  # Fiksuota dimensija
 
 def test_embed_and_query_project():
     tools = EmbeddingTools()
@@ -15,3 +15,13 @@ def test_embed_and_query_project():
     results = tools.query_project_vectors(project_id, embedding)
     print("DEBUG QUERY RESULT:", results)
     assert isinstance(results, list)
+
+def test_rag_retrieve():
+    tools = EmbeddingTools()
+    project_id = "projRAG"
+    text = "test RAG"
+    tools.embed_project(project_id, text, dummy_embedding_fn)
+    results = tools.rag_retrieve(project_id, text, dummy_embedding_fn, top_k=3)
+    print("DEBUG RAG RESULT:", results)
+    assert isinstance(results, list)
+    assert any(isinstance(r, dict) and r.get("project_id") == project_id for r in results)
